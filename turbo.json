@@ -1,0 +1,151 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "build": {
+            "dependsOn": [
+                "compile:js",
+                "compile:typedefs",
+                "test:lint",
+                "test:prettier",
+                "test:treeshakability:browser",
+                "test:treeshakability:native",
+                "test:treeshakability:node",
+                "test:typecheck",
+                "test:unit:browser",
+                "test:unit:node"
+            ],
+            "outputs": ["dist/**"]
+        },
+        "compile:js": {
+            "dependsOn": ["^compile:js"],
+            "inputs": ["tsconfig.*", "src/**"],
+            "outputs": ["dist/**"]
+        },
+        "compile:typedefs": {
+            "dependsOn": ["^compile:typedefs"],
+            "inputs": ["tsconfig.*", "src/**"],
+            "outputs": ["dist/**/*.d.ts"]
+        },
+        "publish-packages": {
+            "cache": false,
+            "dependsOn": [
+                "compile:js",
+                "compile:typedefs",
+                "test:lint",
+                "test:prettier",
+                "test:typecheck",
+                "test:unit:browser",
+                "test:unit:node",
+                "test:treeshakability:browser",
+                "test:treeshakability:native",
+                "test:treeshakability:node"
+            ]
+        },
+        "publish-packages-legacy": {
+            "cache": false,
+            "dependsOn": [
+                "compile:docs",
+                "compile:js",
+                "compile:typedefs",
+                "test:lint",
+                "test:live-with-test-validator",
+                "test:prettier",
+                "test:typecheck",
+                "test:unit:node"
+            ]
+        },
+        "style:fix": {
+            "inputs": ["*"],
+            "outputs": ["*"]
+        },
+        "test:lint": {
+            "dependsOn": ["^compile:typedefs"],
+            "inputs": ["src/**", "test/**"],
+            "outputs": []
+        },
+        "test:live-with-test-validator": {
+            "dependsOn": ["^compile:js"],
+            "inputs": ["src/**"]
+        },
+        "test:prettier": {
+            "inputs": ["*"]
+        },
+        "test:typecheck": {
+            "dependsOn": ["^compile:typedefs"],
+            "inputs": ["tsconfig.*", "src/**"]
+        },
+        "test:unit:browser": {
+            "dependsOn": ["^compile:js"],
+            "inputs": ["src/**"]
+        },
+        "test:unit:node": {
+            "dependsOn": ["^compile:js"],
+            "inputs": ["src/**"]
+        },
+        "test:treeshakability:browser": {
+            "dependsOn": ["compile:js"]
+        },
+        "test:treeshakability:native": {
+            "dependsOn": ["compile:js"]
+        },
+        "test:treeshakability:node": {
+            "dependsOn": ["compile:js"]
+        },
+        "@solana/web3.js#build": {
+            "dependsOn": [
+                "clean",
+                "compile:docs",
+                "compile:js",
+                "compile:typedefs",
+                "test:lint",
+                "test:live-with-test-validator",
+                "test:prettier",
+                "test:typecheck",
+                "test:unit:node"
+            ],
+            "outputs": ["doc/**", "declarations/**", "lib/**"]
+        },
+        "@solana/web3.js#clean": {
+            "outputs": ["doc/**", "declarations/**", "lib/**"]
+        },
+        "@solana/web3.js#compile:docs": {
+            "dependsOn": ["clean"],
+            "inputs": ["src/**"],
+            "outputs": ["doc/**"]
+        },
+        "@solana/web3.js#compile:js": {
+            "dependsOn": ["clean", "^compile:js"],
+            "inputs": ["babel.config.json", "rollup.config.mjs", "tsconfig.*", "src/**"],
+            "outputs": ["lib/**"]
+        },
+        "@solana/web3.js#compile:typedefs": {
+            "dependsOn": ["clean", "^compile:typedefs"],
+            "inputs": [
+                "rollup.config.types.mjs",
+                "scripts/typegen.sh",
+                "src/**",
+                "test/__shadow-jest-types.d.ts",
+                "tsconfig.*"
+            ],
+            "outputs": ["declarations/**", "lib/**/*.d.ts"]
+        },
+        "@solana/web3.js#test:lint": {
+            "inputs": ["src/**", "test/**"]
+        },
+        "@solana/web3.js#test:live-with-test-validator": {
+            "dependsOn": ["^compile:js"],
+            "inputs": ["src/**", "test/**"]
+        },
+        "@solana/web3.js#test:typecheck": {
+            "dependsOn": ["^compile:typedefs"],
+            "inputs": ["src/**", "test/**", "tsconfig.*"]
+        },
+        "@solana/web3.js#test:unit:node": {
+            "dependsOn": ["^compile:js"],
+            "inputs": ["src/**", "test/**"]
+        }
+    },
+    "remoteCache": {
+        "signature": true
+    }
+}

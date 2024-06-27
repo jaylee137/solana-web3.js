@@ -1,0 +1,22 @@
+# IDE & OS specific
+.DS_Store
+.idea
+
+# Logs
+logs
+*.log
+
+# Dependencies
+node_modules
+
+# Release
+lib
+
+# Generated docs
+doc
+
+# VIM swap files
+*.sw*
+
+# TypeScript
+declarations

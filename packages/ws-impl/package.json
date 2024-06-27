@@ -1,0 +1,50 @@
+{
+    "name": "@solana/ws-impl",
+    "version": "0.0.0",
+    "private": true,
+    "exports": {
+        "browser": {
+            "import": "./dist/index.browser.js",
+            "require": "./dist/index.browser.cjs",
+            "types": "./dist/types/index.browser.d.ts"
+        },
+        "node": {
+            "import": "./dist/index.node.js",
+            "require": "./dist/index.node.cjs",
+            "types": "./dist/types/index.browser.d.ts"
+        }
+    },
+    "browser": {
+        "./dist/index.node.cjs": "./dist/index.browser.cjs",
+        "./dist/index.node.js": "./dist/index.browser.js"
+    },
+    "main": "./dist/index.node.cjs",
+    "module": "./dist/index.node.js",
+    "types": "./dist/types/index.browser.d.ts",
+    "type": "module",
+    "files": [
+        "./dist/"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "compile:js": "tsup",
+        "compile:typedefs": "tsc -p ./tsconfig.declarations.json",
+        "dev": "jest -c ../../node_modules/@solana/test-config/jest-dev.config.ts --rootDir . --watch",
+        "style:fix": "pnpm eslint --fix src/* && pnpm prettier --log-level warn --ignore-unknown --write ./*",
+        "test:lint": "jest -c ../../node_modules/@solana/test-config/jest-lint.config.ts --rootDir . --silent",
+        "test:prettier": "jest -c ../../node_modules/@solana/test-config/jest-prettier.config.ts --rootDir . --silent",
+        "test:treeshakability:browser": "agadoo dist/index.browser.js",
+        "test:treeshakability:node": "agadoo dist/index.node.js",
+        "test:typecheck": "tsc --noEmit"
+    },
+    "browserslist": [
+        "supports bigint and not dead",
+        "maintained node versions"
+    ],
+    "devDependencies": {
+        "@types/ws": "^8.5.10"
+    },
+    "peerDependencies": {
+        "ws": "^8.14.0"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "@solana/test-config",
+    "version": "0.0.0",
+    "private": true,
+    "files": [
+        "test-validator-setup.js",
+        "test-validator-teardown.js"
+    ],
+    "peerDependencies": {
+        "jest-dev-server": "^10.0.0",
+        "undici": "^6.6.2",
+        "whatwg-fetch": "^3.6.20"
+    },
+    "devDependencies": {
+        "@jest/types": "^29.6.3",
+        "undici": "^6.6.2",
+        "whatwg-fetch": "^3.6.20"
+    }
+}
