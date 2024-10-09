@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 overrides:
   jsdom: ^22
   mock-socket: ^9.3.1
@@ -428,8 +424,8 @@ importers:
         specifier: ^18.4.4
         version: 18.4.4
       '@rollup/plugin-alias':
-        specifier: ^5.1.0
-        version: 5.1.0(rollup@4.13.2)
+        specifier: ^5.1.1
+        version: 5.1.1(rollup@4.13.2)
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.0.4(@babel/core@7.24.0)(rollup@4.13.2)
@@ -3208,7 +3204,7 @@ packages:
     engines: {node: ^16.10.0 || ^18.12.0 || >=20.0.0}
     peerDependencies:
       canvas: ^2.5.0
-      jsdom: ^22
+      jsdom: '*'
     peerDependenciesMeta:
       canvas:
         optional: true
@@ -3745,8 +3741,8 @@ packages:
       config-chain: 1.1.13
     dev: true
 
-  /@rollup/plugin-alias@5.1.0(rollup@4.13.2):
-    resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
+  /@rollup/plugin-alias@5.1.1(rollup@4.13.2):
+    resolution: {integrity: sha512-PR9zDb+rOzkRb2VD+EuKB7UC41vU5DIwZ5qqCpk0KJudcWAyi8rvYOhS7+L5aZCspw1stTViLgN5v6FF1p5cgQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
@@ -3755,7 +3751,6 @@ packages:
         optional: true
     dependencies:
       rollup: 4.13.2
-      slash: 4.0.0
     dev: true
 
   /@rollup/plugin-babel@6.0.4(@babel/core@7.24.0)(rollup@4.13.2):
@@ -13425,3 +13420,7 @@ packages:
       which: 3.0.1
       yaml: 2.3.1
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
